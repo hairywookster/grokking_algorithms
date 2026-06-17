@@ -15,6 +15,8 @@
 #
 class BinarySearch
 
+  # Note this class could/should be refactored to a module both for ease of use and reduced state holding.
+  # Essentially class -> module, delete initializer, pass sorted_array to both methods, update tests.
   def initialize(sorted_array)
     @sorted_array = sorted_array
   end
