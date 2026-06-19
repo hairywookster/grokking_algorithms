@@ -32,8 +32,11 @@ module QuickSort
     return list if list.size == 1
 
     # recursive case
-    # Pick a random pivot point - the first element in an unsorted list is just as likely to be a good choice as any other.
-    pivot_value = list.first
+    # Pick a random pivot point
+    # If we always pick the first index (or last index) there is a chance that all items will always fall
+    # to the left or right completely. Picking a random index reduces the chances that this edge case can occur.
+    pivot_index = rand(0...list.size)
+    pivot_value = list[pivot_index]
 
     # Create two arrays to contain the items that were less than and greater than the pivot value
     left_side = []
@@ -41,7 +44,7 @@ module QuickSort
     list.each_with_index do |item, index|
       # Now partition the list's items into the two lists whilst ignoring our pivot's index
       # Note the item.send(...) is just the same as doing item <= pivot_value  or  item >= pivot_value
-      (item.send(comparison_operator, pivot_value) ? left_side << item : right_side << item) unless index.zero?
+      (item.send(comparison_operator, pivot_value) ? left_side << item : right_side << item) unless index == pivot_index
     end
 
     # Call our method again with both sets of data and concatenate the results on either side of the pivot's value
