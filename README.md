@@ -21,6 +21,7 @@ Worth noting that in Big O notation any constant is ignored in the notation.
 | O(n * n)     | quadratic time               | Bubble Sort / Selection Sort                                |
 | O(n log n)   | loglinear time (superlinear) | Heap Sort / Merge Sort / Quick Sort                         |
 | O(V * E)     | polynomial time              | Breadth First Search                                        |
+| O(V + E)     | psuedo-polynomial time       | Depth First Search                                          |
 | O(n * n * n) | cubic time                   | Naive matrix multiplication                                 |
 | O(n^c)       | polynomial time              | Bubble Sort / Selection Sort / Insertion Sort / Bucket Sort |
 | O(c^n)       | exponential time             | Tower of Hanoi                                              |
@@ -115,9 +116,11 @@ graph['dave'] = ['joe','jane']
 Breadth First Search runs in O(V * E), ( This is vertices * edges   or   nodes * connections )
 
 Breadth First Searches are useful to solve problems like 
-- shortest path between two nodes in a graph.
+- shortest path between two nodes in an unweighted graph.
 - is there a path between two nodes in a graph.
 - what is the smallest/shortest x
+
+BFS shortest path will not be the most efficient path if weights/costs/time is involved.
 
 ### Determining the path taken
 Additionally, it is useful to store the path travelled through a PARENTS hash table.
@@ -138,17 +141,91 @@ parents[ neighbour_node_2 ] = parent_node
 The path can be reconstructed by looking at the PARENTS hash table starting from the goal node and finding its parent, 
 then the parent of that node, and so on, until you reach the start node which will have no parent.
 
+## Trees (data structure)
+Trees are a type of graph. More precisely they are a connected acyclic graph.
+
+In most cases when we are talking about a tree we mean a tree with a root node, intermediate nodes and leaf nodes.
+The root node is the top most node and contains pointer/reference to child nodes. Leaf nodes are nodes that do not have any child nodes.
+The line that connects each node is called an Edge.
+
+- Trees do not have cycles they are by nature acyclic.
+- binary trees have 0/1/2 children per node  
+- non-binary trees have 0/n children per node
+
+The simplest way to model a non-binary tree is again to use a Hash Table (see graph example) or a Node class. 
+
+The simplest way to model a binary tree is to use a Hash Table or a Node class. 
+
+```ruby
+# Assume Node has been defined and contains a left/right accessor
+jane_node = Node.new(left: nil, right: nil)
+bob_node = Node.new(left: nil, right: nil)
+dave_node = Node.new(left: nil, right: bob_node)
+root_node = Node.new(left: dave_node, right: jane_node)
+#...etc
+```
+
+### Depth First Search (algorithm)
+Depth First Search runs in O(V * E), ( This is vertices * edges   or   nodes * connections )
+
+Depth First Searches are useful to solve problems like
+- most efficient path between two nodes in a weighted graph. 
+- By weighted we mean each edge/connection has a weight/cost/time associated with it.
+
+DFS cannot compute the shortest number of nodes visited path, it can only determine the most efficient.
+
+## Binary Search Trees (BST) (data structure)
+Binary search trees are a specialised form of a tree where each node has at most 2 children. 
+One child (left) will be less than the current node and the other (right) will be greater than the current node, making it ideal for maintaining sorted data.
+
+Shorter depth trees are faster than longer depth trees, they require less steps to find a specific node.
+
+BST's also perform better when they are balanced. Balanced means the depth of the tree is nearly identical on both sides. 
+One way to ensure this is through rotations, whereby a new root node is chosen to better split the nodes between left and right branches.
+
+### AVL trees (data structure)
+An AVL tree is a type of balanced tree that automatically manage their balancing as items are added.
+
+AVLs guarantee O(log n) because their height is alwasy guaranteed to be O(log n) through its self balancing process.
+
+The AVL tree stores an extra height or balance factor at each node, which allows it to determine when and where to rotate.
+The balance factor can be
+- 0 the tree is balanced.
+- -1 or 1 the tree is not balanced but this is okay as the difference is one only.
+- -2 or 2 the tree is not balanced so it needs to be rebalanced.
+The balance factor/height is set from each node that is inserted upwards. If a parent is set to -2 or 2 it needs to be rebalanced.
+The child of the node becomes the parent and the parent becomes the child on the appropriate side.
+
+## Splay Trees (data structure)
+Splay trees operate similarly to an AVL tree but do not guarantee balance. 
+
+Whenever you search for a node, it makes that node the current root. This can be useful for lookup processes whereby 
+the things being most frequently being looked up bubble towards the top of the tree and are thus faster to locate.
+
+Search time is guaranteed to be O(log n) per search.
+
+## B trees (data structure)
+B trees are a generalized form of Binary trees, most frequently used in databases.
+- can have many children
+- can have many keys (values per node)
+- left children are less than the node's keys/values
+- right children are greater than.
+- optimized for physical access time (by physical we mean reduced seek mechanical disk head)
+- you start processing at lower left of this type of tree and work left-to-right, snaking through the nodes.
+
+
 
 ## Some notes on Data Structures
 
-| Structure           | Reading     | Insertion   | Deletion    | Better for                                                                       |
-|---------------------|-------------|-------------|-------------|----------------------------------------------------------------------------------|
-| Arrays              | O(1)        | O(n)        | O(n)        | Dynamic Reads, quickly reading a value at any position in the array              |
-| Stacks              | O(n)        | O(1)        | O(1)        | When last in first out is required                                               |
-| Queues              | O(n)        | O(1)        | O(1)        | When first in first out is required                                              |
-| Linked Lists        | O(n)        | O(1)        | O(1)        | Sequential Reads, processing one after another in fixed order                    |
-| Doubly Linked Lists | O(n)        | O(1)        | O(1)        | Sequential Reads, processing one after another in fixed order but any direction  |
-| Hash Table/Map      | O(1) / O(n) | O(1) / O(n) | O(1) / O(n) | Lookups/Caching/Mapping one thing to another with efficient lookup.              |
+| Structure           | Reading     | Insertion   | Deletion    | Better for                                                                                |
+|---------------------|-------------|-------------|-------------|-------------------------------------------------------------------------------------------|
+| Arrays              | O(1)        | O(n)        | O(n)        | Dynamic Reads, quickly reading a value at any position in the array                       |
+| Stacks              | O(n)        | O(1)        | O(1)        | When last in first out is required                                                        |
+| Queues              | O(n)        | O(1)        | O(1)        | When first in first out is required                                                       |
+| Linked Lists        | O(n)        | O(1)        | O(1)        | Sequential Reads, processing one after another in fixed order                             |
+| Doubly Linked Lists | O(n)        | O(1)        | O(1)        | Sequential Reads, processing one after another in fixed order but any direction           |
+| Hash Table/Map      | O(1) / O(n) | O(1) / O(n) | O(1) / O(n) | Lookups/Caching/Mapping one thing to another with efficient lookup.                       |
+| Trees               | O(log n)    | O(log n)    | O(log n)    | When arrays and Linked lists are too slow, the data tends to favor being stored in a tree |
 
 (Note the Big O's are given for Avg Case/Worst Case where two are presented) 
 
