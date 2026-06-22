@@ -214,6 +214,36 @@ B trees are a generalized form of Binary trees, most frequently used in database
 - you start processing at lower left of this type of tree and work left-to-right, snaking through the nodes.
 
 
+## Dijkstra's Shortest Path (algorithm)
+An algorithm to define the most efficient cost/time/distance from between 2 nodes in a weighted graph.
+
+This is most often used in problems that require calculating the shortest path (in terms of time/distance/cost).
+Or in problems that relate to trading items (i.e. making a series of trades to get to a final goal product).
+
+It only works for weighted graphs where the weights are >= 0 (i.e. positive).
+
+You need to use Bellman-Ford for weighted graphs that include negative weights.
+
+
+## Additional Algorithms/Data Structures
+We will review these in more detail later.
+
+- Heaps (data structure)
+- Priority Queues (data structure)
+- Priority Heaps (data structure)
+- Linear Regression (algorithm) (plotting points to make predictions)
+- Inverted Indexes (data structure) (search engines - think what word appears on what pages)
+- Fourier Transform (algorithm) (separates ingredients in a smoothie, or frequencies in a song)
+- Parallel Algorithms (separates big problems into smaller problems to run on different machines in parallel)
+- Map / Reduce (parallel algorithm)
+- Bloom Filters (probabilistic data structure) (Much smaller than a hash, answers may be wrong)
+- HyperLogLog (probabilistic algorithm) (approximation of unique elements in a set)(products viewed by users etc)
+- Diffe-Hellman key exchange (algorithm) (create a shared secret without transmission for TLS)
+- Locality sensitive hashing (algorithm) (generate a hash that's similar to similar words hashes - opposite of normal hash function) (simhash - duplicates/copyright scanning)
+- Min Heaps (data structure) (min value is always at the root node)
+- Max Heaps (data structure) (max value is always at the root node)
+- Linear programming (simplex algorithm) (maximize something within some linear constraints) (maximize profit from resources and items you can create which use resources)
+- 
 
 ## Some notes on Data Structures
 
@@ -226,6 +256,8 @@ B trees are a generalized form of Binary trees, most frequently used in database
 | Doubly Linked Lists | O(n)        | O(1)        | O(1)        | Sequential Reads, processing one after another in fixed order but any direction           |
 | Hash Table/Map      | O(1) / O(n) | O(1) / O(n) | O(1) / O(n) | Lookups/Caching/Mapping one thing to another with efficient lookup.                       |
 | Trees               | O(log n)    | O(log n)    | O(log n)    | When arrays and Linked lists are too slow, the data tends to favor being stored in a tree |
+| Priority Queues     |             |             |             |                                                                                           |
+| Priority Heaps      |             |             |             |                                                                                           |
 
 (Note the Big O's are given for Avg Case/Worst Case where two are presented) 
 
