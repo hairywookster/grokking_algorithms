@@ -224,6 +224,17 @@ It only works for weighted graphs where the weights are >= 0 (i.e. positive).
 
 You need to use Bellman-Ford for weighted graphs that include negative weights.
 
+## Greedy Algorithms
+There are many different greedy algorithms, but they all mostly revolve around simple choices, 
+i.e. picking the earliest/closest/most valuable thing and repeating until no space/time/funds are available.
+
+Greedy algorithms can help find approximate answers quickly and simply.
+
+Examples are
+
+- Greedy Time scheduler - repeatedly finds the earliest finishing activity to fill up the schedule.
+- Greedy Knapsack - repeatedly tries the largest item downwards to fill up the space.
+- Greedy Set covering - repeatedly finds the set with the least covered and adds it to cover the overall items.
 
 ## Additional Algorithms/Data Structures
 We will review these in more detail later.
