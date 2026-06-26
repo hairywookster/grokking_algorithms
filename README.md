@@ -236,6 +236,38 @@ Examples are
 - Greedy Knapsack - repeatedly tries the largest item downwards to fill up the space.
 - Greedy Set covering - repeatedly finds the set with the least covered and adds it to cover the overall items.
 
+## K Nearest Neighbour / Regression
+K nearest neighbour allows you to determine the similarity between different users/situations.
+Each user/situation is given a number for each feature it possesses.
+Example features for a physical thing  (like a fruit) might be
+- color
+- size
+- roughness of texture
+- like / dislike
+Example features for a user (w.r.t. a rating system) might be
+- action (1-5)
+- horror (1-5)
+- history (1-5)
+- documentary (1-5)
+- scifi (1-5)
+- etc...
+Example features for a bakery situation might be
+- day of week (1-7)
+- weekend (1-2 (yes/no))
+- special holiday (1-2 (yes/no))
+- weather (1-5)
+- sports on (1-2 (yes/no))
+
+The algorithm is built around calculating the distance between two points(vectors).
+We tend to think of 1D/2D/3D space but we cna use the same algorithm for ND space where N is the number of features being rated.
+
+The formula is the standard Pythagorean formula
+```ruby
+# where each Af* is a feature from the first item/thing and Bf* is from the second item/thing 
+Math.sqrt( (Af1-Bf1)**2 - (Af2-Bf2)**2 - (Af3-Bf3)**2 - ...)
+```
+
+
 ## Additional Algorithms/Data Structures
 We will review these in more detail later.
 
