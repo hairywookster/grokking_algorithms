@@ -2,8 +2,8 @@
 
 # A simple class to wrap a knapsack item
 class KnapsackItem
-  attr_reader :name, :weight, :value, :used
-  attr_writer :used
+  attr_reader :name, :weight, :value
+  attr_accessor :used
 
   def initialize(name, weight, value)
     @name = name
@@ -45,11 +45,12 @@ class Knapsack
   def remaining_capacity
     @capacity - @total_weight
   end
+
   def full?
     remaining_capacity.zero?
   end
 
-  def can_hold?( item )
+  def can_hold?(item)
     item.weight <= remaining_capacity
   end
 
@@ -72,7 +73,7 @@ module GreedyKnapsack
     # sort by highest value descending
     all_items.sort! { |a,b| b.value <=> a.value }
 
-    #find the next most valuable item that can fit into the knapsack
+    # find the next most valuable item that can fit into the knapsack
     next_item_to_add = find_next_most_valuable_fitting_item(knapsack, all_items)
 
     # repeat this process until we run out of items or the knapsack is full
