@@ -236,7 +236,7 @@ Examples are
 - Greedy Knapsack - repeatedly tries the largest item downwards to fill up the space.
 - Greedy Set covering - repeatedly finds the set with the least covered and adds it to cover the overall items.
 
-## K Nearest Neighbour / Regression
+## K Nearest Neighbour / Regression (algorithms)
 K nearest neighbour allows you to determine the similarity between different users/situations.
 Each user/situation is given a number for each feature it possesses.
 Example features for a physical thing  (like a fruit) might be
@@ -266,6 +266,34 @@ The formula is the standard Pythagorean formula
 # where each Af* is a feature from the first item/thing and Bf* is from the second item/thing 
 Math.sqrt( (Af1-Bf1)**2 - (Af2-Bf2)**2 - (Af3-Bf3)**2 - ...)
 ```
+
+## Dynamic Programming (algorithms)
+These types of algorithms are usually used to identify optimal solutions for problems where you have multiple things of differing values/weights/times etc.
+
+Classic examples are
+- making change given a set of coins
+- knapsack filling given a list of items with weights/values and a knapsack of a specific capacity
+- travel itinerary planning
+- longest common sequence of characters (think dna strands of characters)
+- longest common substring (like closest word matching - 'full' is closer to 'fill' than it is to 'soup')
+
+The dynamic programming technique is based on reducing a big problem down into smaller discrete problems that can be solved on their own. 
+The solution to the smaller problems can be reused to solve the bigger problem.
+
+The algorithms typically work using a 2D grid, where the columns are the constraining factor (think time/weight) 
+and the rows are the items/things being reviewed for optimality.
+
+Interestingly the solutions to the smaller problems can be re-used even if you later add new items/things (rows of data).
+
+One thing to note is that you cannot solve for fractions of an item i.e. a bag of lentils where you take a portion. 
+All units must be solid, you either take an item (think coin, laptop, apple) or you do not.
+However, a greedy algorithm is ideal for problems where you can take portions of items.
+
+Another thing to note is that you cannot solve when handling items/things that depend on each other. 
+The example given was when determining how best to spend time at tourist attractions, it cannot take into 
+account the fact that some attractions are co-resident thus reducing travel time. You only travel to 
+Paris once to see two attractions there for example.
+
 
 
 ## Additional Algorithms/Data Structures
